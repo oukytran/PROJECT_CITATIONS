@@ -1,0 +1,216 @@
+<html>
+  <head>
+    <title>Duels de citations</title>
+    <link rel="stylesheet" href="bulma.min.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a id="btn-open-login-modal" class="button is-light" onclick="openMdl('mdl-login');">
+              Connexion
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <h1 class="title">Duels de citations</h1>
+        <p class="subtitle">Quelle est votre citation favorite ?</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="tabs is-centered">
+        <ul>
+          <li id="tab-duel" class="is-active" ><a>Voter</a></li>
+          <li id="tab-tout"><a>Toutes les citations</a></li>
+          <li id="tab-add"><a>Ajouter une citation</a></li>
+        </ul>
+      </div>
+      <div class="columns" id="div-duel">
+        <div class="column"> <!-- Citation Left -->
+          <div class="card">
+            <div class="columns card-content">
+              <div class="column is-one-third">
+                <div class="card-image">
+                  <figure class="image" id="cardLeft">
+                    
+                  </figure>
+                </div>
+              </div>
+              <div class="column is-8" id="citLeft">
+                
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="columns is-centered">
+                <p class="button is-danger" id="btnLeft">
+                  Voter pour la citation de gauche !
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column"> <!-- Citation Right -->
+          <div class="card">
+            <div class="columns card-content">
+              <div class="column is-8" id="citRight">
+                
+              </div>
+              <div class="column is-one-third">
+                <div class="card-image">
+                  <figure class="image" id="cardRight">
+                    
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="columns is-centered" id="btnRight">
+                <p class="button is-info">Voter pour la citation de droite !</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="div-tout">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Classement</th>
+              <th>Personnage</th>
+              <th>Citation</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tBody">
+            
+          </tbody>
+        </table>
+      </div>
+      <div id="div-add" class="columns is-centered">
+        <div class="box column is-half">
+          <div class="field">
+            <label class="label">Citation <span title="(obligatoire)" aria-hidden="true" class="has-text-danger">*</span> </label>
+            <div class="control">
+              <textarea class="textarea" id="inputQuote" rows="2" placeholder="They taste like...burning."></textarea>
+              <span id="errorQuote" class="help is-danger"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Personnage <span title="(obligatoire)" aria-hidden="true" class="has-text-danger">*</span> </label>
+            <div class="control">
+              <input class="input" id="inputCharacter" type="text" placeholder="Ralph Wiggum">
+              <span id="errorCharacter" class="help is-danger"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Origine <span title="(obligatoire)" aria-hidden="true" class="has-text-danger">*</span> </label>
+            <div class="control">
+              <input class="input" id="inputOrigin" type="text" placeholder="The Simpsons">
+              <span id="errorOrigin" class="help is-danger"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Lien d'image</label>
+            <div class="control">
+              <input class="input" id="inputImage" type="text" placeholder="https://image.png">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Direction d'image</label>
+            <div class="control">
+              <div class="select">
+                <select id="inputCharacterDirection">
+                  <option value="Left">Left</option>
+                  <option value="Right">Right</option>
+                </select>
+              </div>            
+            </div>
+          </div>
+          <small aria-hidden="true">Les champs avec <span title="(obligatoire)" class="has-text-danger">*</span> sont obligatoires.</small><br><br>
+          
+          <div class="buttons is-centered">
+            <button class="button is-primary" onclick="addCit();">Ajouter</button>
+          </div>
+        </div>       
+      </div>
+    </section>
+
+    <div id="mdl-login" class="modal">
+      <div class="modal-background"></div>
+      <div id="modalLogin" class="modal-card">
+        <header id="modalHeader" class="modal-card-head">
+          <p class="modal-card-title">Connexion</p>
+          <button
+            id="btn-close-login-modal1"
+            class="delete"
+            aria-label="close"
+            onclick="closeMdl('mdl-login');"
+          ></button>
+        </header>
+        <section id="modalSection" class="modal-card-body">
+          <p id="elt-affichage-login">
+            <label for="apiKey">Saisissez votre clé api:</label>
+            <input id="txtApi" class="input" type="password" placeholder="Clé API">
+            <span id="error-login" class="help"></span>
+          </p>
+        </section>
+        <footer id="modalFooter" class="modal-card-foot" style="justify-content: flex-end">
+          <button id="btn-close-login-modal2" class="button" onclick="closeMdl('mdl-login');">Fermer</button>
+          <button id="btnLogin" class="button" onclick="lanceWhoamiEtInsereLogin();">Se Connecter</button>
+        </footer>
+      </div>
+    </div>
+
+    <div id="mdl-inf" class="modal">
+      <div class="modal-background"></div>
+      <div id="modalInf" class="modal-card">
+        <header id="" class="modal-card-head">
+          <p class="modal-card-title">Information</p>
+          <button
+            id="btn-close-inf-modal"
+            class="delete"
+            aria-label="close"
+            onclick="closeMdl('mdl-inf');"
+          ></button>
+        </header>
+        <section id="" class="modal-card-body">
+            <div class="field">
+              <b>Citation: </b>
+              <span id="editQuote" type="text"></span>
+            </div>
+            <div class="field">
+              <b>Personnage: </b>
+              <span id="editCharacter" type="text"></span>
+            </div>
+            <div class="field">
+              <b>Origine: </b>
+              <span id="editOrigin" type="text"></span>
+            </div>
+            <div class="field">
+              <b>Lien d'image: </b>
+              <span id="editImage" type="url"></span>
+            </div>
+            <div class="field">
+              <b>Direction d'image: </b>
+              <span id="editCharacterDirection" type="text"></span>
+            </div>
+            <div class="field">
+              <b>Ajouter par: </b>
+              <span id="editAddedBy" type="text"></span>
+            </div>
+        </section>
+        <footer id="" class="modal-card-foot" style="justify-content: flex-end">
+          <button id="btn-close-inf-modal" class="button" onclick="closeMdl('mdl-inf');">Fermer</button>
+        </footer>
+      </div>
+    </div>
+
+    <script src="client.js"></script>
+    <script src="https://kit.fontawesome.com/c5a42a0316.js" crossorigin="anonymous"></script>
+  </body>
+</html>
